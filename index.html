@@ -223,9 +223,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2024-06-26 03:02:12 / 修改时间：17:14:06" itemprop="dateCreated datePublished" datetime="2024-06-26T03:02:12+08:00">2024-06-26</time>
+      <time title="创建时间：2024-06-26 03:02:12" itemprop="dateCreated datePublished" datetime="2024-06-26T03:02:12+08:00">2024-06-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-06-28 02:33:11" itemprop="dateModified" datetime="2024-06-28T02:33:11+08:00">2024-06-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -247,7 +253,70 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="Classical-AUTOSAR部分"><a href="#Classical-AUTOSAR部分" class="headerlink" title="Classical AUTOSAR部分"></a>Classical AUTOSAR部分</h3>
+          <h1 id="Classical-AUTOSAR部分"><a href="#Classical-AUTOSAR部分" class="headerlink" title="Classical AUTOSAR部分"></a>Classical AUTOSAR部分</h1><hr>
+<h2 id="questions"><a href="#questions" class="headerlink" title="questions"></a>questions</h2><p><img src="/2024/06/26/12/questions_1.png"></p>
+<h2 id="process"><a href="#process" class="headerlink" title="process"></a>process</h2><p>AUTOSAR（Automotive Open System ARchitecture）是一个汽车行业的开放式标准，它定义了一套支持分布式的、功能驱动的汽车电子软件开发方法和电子控制单元上的软件架构标准化方案。它旨在提高软件的复用性、降低开发成本，并应对汽车电子系统日益增长的复杂性。AUTOSAR通过标准化基础软件和应用接口，允许不同供应商生产的模块集成到汽车系统中，同时支持整个产品生命周期的管理。</p>
+<p>AUTOSAR的架构允许软件组件之间以及软件组件与基础软件之间的通信，这些组件的接口在AUTOSAR中被标准化。它还提供了一套方法论，定义了从系统设计到ECU配置再到ECU可执行文件生成的开发流程，并涉及了辅助工具的使用。</p>
+<p>AUTOSAR的开发目标包括标准化汽车系统的基础软件为跨OEM的“标准栈”，实现软件功能模块在不同车型之间的重用，以及提供标准化的代码配置和建模工具。AUTOSAR正在成为现实，许多OEM和供应商已经引入了AUTOSAR，并计划在未来的车型中采用它。尽管AUTOSAR还在发展中，存在一些不足，但得到了全球汽车整车厂、零部件供应商和半导体厂商的广泛支持。</p>
+<p><img src="/2024/06/26/12/autosar%E6%9E%B6%E6%9E%84.png" alt="alt text">  </p>
+<p>一、微控制器层</p>
+<p>1、微控制器主要模块：<br><img src="/2024/06/26/12/%E5%BE%AE%E6%8E%A7%E5%88%B6%E5%99%A8%E5%B1%82%E7%9A%84%E4%B8%BB%E8%A6%81%E8%BD%AF%E4%BB%B6%E6%A8%A1%E5%9D%97.png" alt="alt text"><br>2、微控制器分层：</p>
+<ul>
+<li>microcontroller drivers</li>
+<li>communication drivers</li>
+<li>memory drivers</li>
+<li>i&#x2F;o drivers</li>
+<li>crypto drivers</li>
+<li>wireless communication drivers</li>
+</ul>
+<p>3、各层的功能：</p>
+<ul>
+<li>驱动微控制器内部外设，通过函数直接访问微控制器</li>
+<li>主要是驱动板级设备通信，例如：SPI设备和CAN设备，属于OSI中的数据链路层</li>
+<li>驱动板级存储设备以及外部存储设备，例如：eeprom、external flash</li>
+<li>驱动模拟和数字IO，如：PWM、ADC</li>
+<li>驱动加密设备，例如：SHE、HSM</li>
+<li>驱动无线通信系统，如车辆网络中不同板级之间的通信</li>
+</ul>
+<p>二、ECU抽象层</p>
+<p>1、ECU抽象层分层：</p>
+<ul>
+<li>IO Hardware abstraction</li>
+<li>communication hardware abstraction</li>
+<li>memory hardware abstraction</li>
+<li>onboard device abstraction</li>
+<li>crypto hardware abstraction</li>
+</ul>
+<p>2、ECU抽象层各层功能：</p>
+<ul>
+<li>抽象ECU布局的IO链接，向上层提供IO信号，隐藏硬件布局细节</li>
+<li>提供相同的机制来访问硬件，不用考虑硬件实际情况，例如：CAN</li>
+<li>提供一种相同的机制来访问片上和外部的存储器</li>
+<li>板载设备抽象包含ECU板载设备的驱动程序，这些设备不能像内部或外部看门狗那样被视为传感器或执行器。这些驱动器通过μC抽象层访问ECU板载设备。</li>
+<li>提供相同的机制访问内部和软件加密设备</li>
+</ul>
+<p>三、服务层</p>
+<p>1、服务层分层：</p>
+<ul>
+<li>加密服务层</li>
+<li>通信服务</li>
+<li>板间通信服务</li>
+<li>内存服务</li>
+<li>系统服务</li>
+</ul>
+<p>2、服务层各层功能：</p>
+<ul>
+<li><p><img src="/2024/06/26/12/%E5%8A%A0%E5%AF%86%E6%9C%8D%E5%8A%A1%E5%B1%82%E5%8A%9F%E8%83%BD.png"><br><img src="/2024/06/26/12/%E5%8A%A0%E5%AF%86%E6%9C%8D%E5%8A%A1%E5%B1%82%E4%B8%89%E9%83%A8%E5%88%86.png">  </p>
+</li>
+<li><p>通信服务主要是进行汽车网络通信，例如：CAN、FlexRay、TTCAN（time triggered can）、Ethernet，通过通信硬件抽象层访问通信驱动，下面是CAN通信的图<br><img src="/2024/06/26/12/CAN%E9%80%9A%E4%BF%A1%E6%A1%86%E5%9B%BE.png" alt="alt text"> </p>
+</li>
+<li><p>The Off-board Communication Services are<br>a group of modules for Vehicle-to-X<br>communication via an ad-hoc wireless<br>network.</p>
+</li>
+<li><p>Provide non volatile data to the<br>application in a uniform way. Abstract from<br>memory locations and properties. Provide<br>mechanisms for non volatile data<br>management like saving, loading, checksum<br>protection and verification, reliable storage<br>etc.</p>
+</li>
+<li><p><img src="/2024/06/26/12/%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1%E6%A1%86%E5%9B%BE.png" alt="alt text"></p>
+</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/06/26/12/#more" rel="contents">
